@@ -56,7 +56,7 @@ void senddata(int flag) {
     url = "/update?api_key=" + apiKey + "&field1=" + temp;
   }
   if(flag==1){
-      host = "52.79.239.221";
+      host = "52.79.239.221";//public ip of your server
       port = 8000;
       url = "/log?temp=" + temp; 
   }
@@ -65,7 +65,7 @@ void senddata(int flag) {
     return;
   }
   if(flag==1) {
-    host = "http://52.79.239.221";
+    host = "http://52.79.239.221";// public ip of your server
   }
   client.print(String("GET ") + url + " HTTP/1.1\r\n" +
                "Host: " + host + "\r\n" +
