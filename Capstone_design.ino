@@ -18,7 +18,7 @@ void setup() {
   // to be changed
   // We start by connecting to a WiFi network
   // Wifi name and the password
-  WiFiMulti.addAP("helloworld", "jmjmjm1234");
+  WiFiMulti.addAP("bigpros", "201201201");
 
   Serial.println();
   Serial.println();
@@ -39,7 +39,7 @@ void setup() {
   sensors.begin();
 }
 
-void senddata(int flag) {
+void senddata(int flag) {//implementing double connection in loop function was error
   WiFiClient client;
   sensors.requestTemperatures();
   Serial.print("Temperature for Device 1 is: ");
@@ -50,14 +50,14 @@ void senddata(int flag) {
   String url;
   uint16_t port;
 
-  if(flag==0){
+  if(flag==0){// sending data to thingspeak
     host="api.thingspeak.com";
     port = 80;
     url = "/update?api_key=" + apiKey + "&field1=" + temp;
   }
-  if(flag==1){
+  if(flag==1){// sending data to my server.
       host = "52.79.239.221";//public ip of your server
-      port = 8000;
+      port = 8000; // over 1000
       url = "/log?temp=" + temp; 
   }
   if (!client.connect(host, port)) {
@@ -80,7 +80,7 @@ void loop() {
 
   static long millisSec = millis();
 
-  if (millis() - millisSec > 60000) {
+  if (millis() - millisSec > 60000) { // time interval is 1 minute
     millisSec = millis();
     senddata(0);
 
